@@ -76,7 +76,7 @@ from News.models import *
 Post.objects.filter(post_rating = 2).values('author', 'title', 'category')
 
 
-
+like(), dislike(), preview() работают
 
 
 
