@@ -1,0 +1,85 @@
+from News.models import *
+
+1) Добавил пользователей.
+>>> User.objects.create_user('Ivanov')
+<User: Ivanov>
+>>> User.objects.create_user('Petrovansky')
+<User: Petrovansky>
+>>> User.objects.create_user('Van Damme')
+<User: Van Damme>
+>>> User.objects.create_user('Mongerstein')
+<User: Mongerstein>
+>>> User.objects.create_user('Alexandra')
+<User: Alexandra>
+
+
+
+
+
+
+2) Добавил авторов.
+>>> user1 = User.objects.get(id=1)
+>>> Author.objects.create(user = user1)
+<Author: Author object (1)>
+>>> user2 = User.objects.get(id = 2)
+>>> Author.objects.create(user = user2)
+<Author: Author object (2)>
+
+3) Создал категории
+>>> Category.objects.create(category_name = 'KRIMINAL')
+>>> Category.objects.create(category_name = 'SPORT')
+>>> Category.objects.create(category_name = 'Futbol')
+>>> Category.objects.create(category_name = 'Showbusiness')
+>>> Category.objects.create(category_name = 'Novosty iz Pitera')
+
+4) Создал статьи и новость.
+>>> from News import newscont
+>>>Post.objects.create(author = Author.objects.get(pk=1), post_type = 'ART', title = 'Куда делся Мбаппе?', content = newscont.statya1)
+>>>Post.objects.create(author = Author.objects.get(pk=1), post_type = 'ART', title = 'Пейте кефир.', content = newscont.statya2)
+>>>Post.objects.create(author = Author.objects.get(pk=2), post_type = 'NEW', title = 'Слеш взялся за старое!!', content = newscont.nowost1)
+
+5)Присваиваю категории.
+>>> post1 = Post.objects.get(pk=1)
+>>> category1 = Category.objects.get(pk=3)
+>>> post1.category.add(category1)
+
+>>> category2 = Category.objects.get(pk=2)
+>>> post1.category.add(category2)
+
+>>> post2 = Post.objects.get(pk=2)
+>>> category5 = Category.objects.get(pk=5)
+>>> post2.category.add(category5)
+
+>>> post3 = Post.objects.get(pk=3)
+>>> category3 = Category.objects.get(pk=4)
+>>> post3.category.add(category3)
+
+6)Создаю комментарии.
+>>>Comment.objects.create(post = Post.objects.get(pk=1), user = User.objects.get(id = 3), comment_text = 'Это вздор чистой воды. У Мбаппе нет брата!')
+>>> Comment.objects.create(post = Post.objects.get(pk=1), user = User.objects.get(id = 4), comment_text = 'Вы хоть инфу то проверяйте свою.')
+>>>Comment.objects.create(post = Post.objects.get(pk=2), user = User.objects.get(id = 5), comment_text = 'На самом деле все не так. Пейте кофе.')
+>>> Comment.objects.create(post = Post.objects.get(pk=3), user = User.objects.get(id = 3), comment_text = 'Ох уж эти старые рокеры, прям как дети малые.')
+
+7)Ставим лайки.
+>>> Comment.objects.get(pk=1).like()
+>>> Comment.objects.get(pk=2).dislike()
+>>> Comment.objects.get(pk=3).like()
+>>> Comment.objects.get(pk=4).dislike()
+
+>>> Post.objects.get(pk=1).like()
+>>> Post.objects.get(pk=2).dislike()
+>>> Post.objects.get(pk=3).like()
+
+8)Не понимаю с каким синтаксисом сделать update_rating().
+9)Это и далее я уже не осилил. Нужны дополнительные материалы или хотя бы список корректных команд.
+
+Post.objects.filter(post_rating = 2).values('author', 'title', 'category')
+
+
+
+
+
+
+
+
+
